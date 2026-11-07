@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071321">
+<title>Xia mo Mini 1.1</title>
+<style>
+:root{--bg:#071321;--panel:#10243a;--panel2:#0b1c2e;--cyan:#19d8ff;--muted:#9bb2c8;--white:#f3f9ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#123454 0,#071321 48%,#050d17 100%);color:var(--white);font-family:Arial,Helvetica,sans-serif;min-height:100vh;padding:22px 15px 35px}
+.wrap{max-width:520px;margin:auto}
+header{text-align:center;padding:18px 8px 22px}
+.logo{width:68px;height:68px;border:2px solid var(--cyan);border-radius:22px;margin:0 auto 12px;display:grid;place-items:center;color:var(--cyan);font-size:30px;font-weight:800;box-shadow:0 0 24px #19d8ff44}
+h1{margin:0;color:var(--cyan);font-size:32px;letter-spacing:3px}
+.sub{color:var(--muted);font-size:13px;margin-top:7px}
+.status{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:6px 11px;border:1px solid #1b725f;border-radius:30px;color:#7fffd4;font-size:11px;letter-spacing:1px}
+.dot{width:7px;height:7px;border-radius:50%;background:#4cffb0;box-shadow:0 0 8px #4cffb0}
+.card{background:linear-gradient(145deg,#122a42,#0b1b2c);border:1px solid #23415c;border-radius:18px;padding:18px;margin:13px 0;box-shadow:0 12px 30px #0003}
+h2{font-size:16px;margin:0 0 13px;color:#eaf8ff}
+.desc{font-size:12px;color:var(--muted);line-height:1.5;margin:-5px 0 13px}
+input,select{width:100%;padding:14px;border-radius:11px;border:1px solid #31516d;background:#071725;color:white;font-size:15px;outline:none}
+input:focus,select:focus{border-color:var(--cyan)}
+button{border:0;border-radius:11px;background:var(--cyan);color:#04121d;font-weight:700;padding:13px 16px;font-size:14px;cursor:pointer}
+button:active{transform:scale(.98)}
+.primary{width:100%;margin-top:10px}
+.answer{margin-top:14px;padding:13px;border-radius:12px;background:#071725;border-left:3px solid var(--cyan);min-height:52px;color:#d9f5ff;line-height:1.5;font-size:14px;white-space:pre-wrap}
+.app-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.app-btn{background:#0a1a2b;color:#eaf8ff;border:1px solid #294762;display:flex;align-items:center;gap:10px;text-align:left;min-height:58px}
+.app-icon{font-size:22px;width:28px;text-align:center}
+.app-btn small{display:block;color:var(--muted);font-size:10px;font-weight:400;margin-top:3px}
+.note{font-size:11px;color:var(--muted);line-height:1.5;margin:12px 2px 0}
+footer{text-align:center;color:#6f8ba4;font-size:11px;padding:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">X</div>
+  <h1>XIA MO</h1>
+  <div class="sub">PERSONAL SMART ASSISTANT · MINI 1.0</div>
+  <div class="status"><span class="dot" id="statusDot"></span> <span id="systemStatus">ONLINE KNOWLEDGE READY</span></div>
+</header>
+
+<section class="card">
+  <h2>💬 Ask Xia mo</h2>
+  <p class="desc">Ask Xia mo. It will search Wikipedia online for information and use its built-in knowledge if the internet is unavailable.</p>
+  <input id="question" type="text" placeholder="Example: What is AI?" autocomplete="off">
+  <button class="primary" id="askButton" onclick="askXiaMo()">ASK XIA MO</button>
+  <button class="primary" style="background:#193650;color:#dff8ff;border:1px solid #31516d;margin-top:8px" onclick="searchWeb()">SEARCH ON GOOGLE</button>
+  <div class="answer" id="answer" aria-live="polite">Hello! I am Xia mo. Ask me something.</div>
+</section>
+
+<section class="card">
+  <h2>📱 App Launcher</h2>
+  <p class="desc">Choose an app and tap Open. It may open the installed app or its website.</p>
+  <select id="appSelect">
+    <option value="youtube">YouTube</option>
+    <option value="google">Google</option>
+    <option value="maps">Google Maps</option>
+    <option value="gmail">Gmail</option>
+    <option value="whatsapp">WhatsApp</option>
+    <option value="wikipedia">Wikipedia</option>
+  </select>
+  <button class="primary" onclick="openSelectedApp()">OPEN SELECTED APP</button>
+  <p class="note">Some apps may not open directly if they are not installed or if Android blocks the app link. In that case, the website may open instead.</p>
+</section>
+
+<section class="card">
+  <h2>⚡ Quick Open</h2>
+  <div class="app-grid">
+    <button class="app-btn" onclick="openApp('youtube')"><span class="app-icon">▶️</span><span>YouTube<small>Videos and Shorts</small></span></button>
+    <button class="app-btn" onclick="openApp('google')"><span class="app-icon">🔎</span><span>Google<small>Search the web</small></span></button>
+    <button class="app-btn" onclick="openApp('maps')"><span class="app-icon">🗺️</span><span>Maps<small>Places and directions</small></span></button>
+    <button class="app-btn" onclick="openApp('gmail')"><span class="app-icon">✉️</span><span>Gmail<small>Email</small></span></button>
+  </div>
+</section>
+<footer>XIA MO MINI 1.1 · ONLINE KNOWLEDGE EDITION · YOUR PERSONAL PROJECT</footer>
+</div>
+
+<script>
+const knowledge = [
+  {keys:["hello","hi","hey"], reply:"Hello! Welcome to Xia mo. How can I help you?"},
+  {keys:["your name","who are you"], reply:"My name is Xia mo. I am your personal assistant project."},
+  {keys:["who created you","your creator"], reply:"I am a personal AI assistant project being developed by my creator."},
+  {keys:["help","what can you do"], reply:"I can search online information through Wikipedia and help open selected apps."}
+];
+
+function setStatus(isOnline){
+  const label=document.getElementById('systemStatus');
+  const dot=document.getElementById('statusDot');
+  if(label) label.textContent=isOnline?'ONLINE KNOWLEDGE READY':'OFFLINE · BASIC MODE';
+  if(dot) dot.style.background=isOnline?'#4cffb0':'#ffbd4a';
+}
+window.addEventListener('online',()=>setStatus(true));
+window.addEventListener('offline',()=>setStatus(false));
+setStatus(navigator.onLine);
+
+async function askXiaMo(){
+  const field=document.getElementById('question');
+  const q=field.value.trim();
+  const output=document.getElementById('answer');
+  const button=document.getElementById('askButton');
+  if(!q){output.textContent='Please type a question first.';return;}
+
+  const lower=q.toLowerCase();
+  const local=knowledge.find(item=>item.keys.some(key=>lower.includes(key)));
+  if(local){output.textContent=local.reply;return;}
+
+  if(!navigator.onLine){
+    output.textContent='You appear to be offline. Connect to the internet and try again. Your app launcher will still work.';
+    setStatus(false);
+    return;
+  }
+
+  button.disabled=true;
+  button.textContent='SEARCHING ONLINE...';
+  output.textContent='Xia mo is searching online knowledge...';
+
+  try{
+    const endpoint='https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent(q)+'&gsrlimit=1&prop=extracts&exintro=1&explaintext=1&format=json&origin=*';
+    const response=await fetch(endpoint);
+    if(!response.ok) throw new Error('Online search is unavailable.');
+    const data=await response.json();
+    const pages=data.query && data.query.pages ? Object.values(data.query.pages) : [];
+    if(pages.length && pages[0].extract){
+      const page=pages[0];
+      const extract=page.extract.length>1400?page.extract.slice(0,1400)+'…':page.extract;
+      output.textContent='ONLINE RESULT · '+page.title+'\n\n'+extract+'\n\nSource: English Wikipedia';
+    }else{
+      output.textContent='I could not find a useful Wikipedia result. Try a shorter or clearer question, or use Search on Google.';
+    }
+    setStatus(true);
+  }catch(error){
+    output.textContent='Xia mo could not connect to online knowledge right now. Check your internet connection and try again.\n\nBasic app features are still available.';
+    setStatus(navigator.onLine);
+  }finally{
+    button.disabled=false;
+    button.textContent='ASK XIA MO';
+  }
+}
+
+document.getElementById('question').addEventListener('keydown',function(e){
+  if(e.key==='Enter') askXiaMo();
+});
+
+function searchWeb(){
+  const q=document.getElementById('question').value.trim();
+  if(!q){document.getElementById('answer').textContent='Type what you want to search, then tap SEARCH ON GOOGLE.';return;}
+  window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');
+}
+
+const apps={
+  youtube:{url:'https://www.youtube.com',intent:'intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url=https%3A%2F%2Fwww.youtube.com;end'},
+  google:{url:'https://www.google.com',intent:'intent://www.google.com/#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fwww.google.com;end'},
+  maps:{url:'https://maps.google.com',intent:'intent://maps.google.com/#Intent;scheme=https;package=com.google.android.apps.maps;S.browser_fallback_url=https%3A%2F%2Fmaps.google.com;end'},
+  gmail:{url:'https://mail.google.com',intent:'intent://mail.google.com/#Intent;scheme=https;package=com.google.android.gm;S.browser_fallback_url=https%3A%2F%2Fmail.google.com;end'},
+  whatsapp:{url:'https://www.whatsapp.com',intent:'intent://send/#Intent;scheme=whatsapp;package=com.whatsapp;end'},
+  wikipedia:{url:'https://www.wikipedia.org',intent:'intent://www.wikipedia.org/#Intent;scheme=https;package=org.wikipedia;S.browser_fallback_url=https%3A%2F%2Fwww.wikipedia.org;end'}
+};
+
+function openApp(name){
+  const app=apps[name];
+  if(!app)return;
+  window.location.href=app.intent;
+}
+function openSelectedApp(){
+  const name=document.getElementById('appSelect').value;
+  openApp(name);
+}
+</script>
+</body>
+</html>
