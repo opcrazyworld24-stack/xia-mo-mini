@@ -2,11 +2,19 @@
 {
   "name": "Xia mo Mini AI",
   "short_name": "Xia mo",
-  "description": "Personal Smart Assistant",
+  "description": "Personal AI Assistant",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#071321",
-  "theme_color": "#00bde8"
+  "theme_color": "#00bde8",
+  "icons": [
+    {
+      "src": "./xia-mo-icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
