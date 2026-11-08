@@ -170,5 +170,15 @@ function openSelectedApp(){
   openApp(name);
 }
 </script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("Xia mo is ready!"))
+      .catch(error => console.log(error));
+  });
+}
+</script>
 </body>
 </html>
