@@ -9,11 +9,16 @@
   "background_color": "#071321",
   "theme_color": "#00bde8",
   "icons": [
-    {
-      "src": "./xia-mo-icon.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
-}
+  {
+    "src": "./xia-mo-icon-192.png",
+    "sizes": "192x192",
+    "type": "image/png",
+    "purpose": "any"
+  },
+  {
+    "src": "./xia-mo-icon-512-1.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any"
+  }
+]
