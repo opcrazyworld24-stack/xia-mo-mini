@@ -1,7 +1,8 @@
 {
-  "name": "Xia mo Mini AI",
-  "short_name": "Xia mo",
-  "description": "Personal AI Assistant",
+  "id": "./",
+  "name": "TITAN WAR",
+  "short_name": "TITAN WAR",
+  "description": "Futuristic Rocket Battle Game",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -9,16 +10,15 @@
   "background_color": "#071321",
   "theme_color": "#00bde8",
   "icons": [
-  {
-    "src": "./xia-mo-icon-192.png",
-    "sizes": "192x192",
-    "type": "image/png",
-    "purpose": "any"
-  },
-  {
-    "src": "./xia-mo-icon-512-1.png",
-    "sizes": "512x512",
-    "type": "image/png",
-    "purpose": "any"
-  }
-]
+    {
+      "src": "./xia-mo-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./xia-mo-icon-512-1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
